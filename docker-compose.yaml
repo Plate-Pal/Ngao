@@ -1,0 +1,16 @@
+services:
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    networks:
+      - platepal-network
+    volumes:
+      - ${PWD}/pg-data/:/var/lib/postgresql/data/
+      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks: 
+  platepal-network:
+    driver: bridge
